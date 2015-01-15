@@ -26,10 +26,7 @@ A thelma component providing data utility functions
           return _.min(data, feild);
         },
         'sum': function(data, field) {
-          console.log('--- data, feild ',data,field);
           return _.reduce(data, function(result, current) {
-              console.log(current[field]);
-              console.log(numeral().unformat(current[field]));
               return result + numeral().unformat(current[field]);
           }, 0);
         },
