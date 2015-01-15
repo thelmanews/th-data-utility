@@ -22,13 +22,39 @@ A thelma component providing data utility functions
   <script>
     Polymer({
       aggregateFunctions: {
+        /*
         'min': function(data, feild) {
-          return _.min(data, feild);
+          return _.chain(data)
+                  .min(function(item) {
+                    var n = item[feild];
+                    var unformat = numeral().unformat(n);
+                    unformat = (unformat===0 && n!==0) ? n : unformat;
+                    return unformat;
+                  })
+                  .pluck(feild)
+                  .value();
+
+        },
+        */
+        'min': function(data, field) {
+          return _.reduce(data, function(result, current) {
+              return _.min([result, numeral().unformat(current[field])]);
+          }, Number.MAX_VALUE);
+        },
+        'max': function(data, field) {
+          return _.reduce(data, function(result, current) {
+              return _.max([result, numeral().unformat(current[field])]);
+          }, Number.MIN_VALUE);
         },
         'sum': function(data, field) {
           return _.reduce(data, function(result, current) {
               return result + numeral().unformat(current[field]);
           }, 0);
+        },
+        'avg': function(data, field) {
+          return _.reduce(data, function(result, current) {
+              return result + numeral().unformat(current[field]);
+          }, 0) / (data.length === 0 ? 1 : data.length);
         },
       },
       /**
