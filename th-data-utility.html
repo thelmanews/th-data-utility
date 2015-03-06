@@ -62,6 +62,8 @@ A thelma component providing data utility functions
        * checks if a culomn in data is numerical. 
        * Note! current implementation is too forgiving. unformat function extracts
        * any number within a string so turning 'my1stNumber' to 1.
+       *
+       * @method isColumnNumeric
        * @param  {Array}  data       data in array of objects format
        * @param  {String}  column     column name
        * @param  {Number}  sampleSize Number of samples from from data to be checked.
@@ -84,6 +86,14 @@ A thelma component providing data utility functions
                  })
                  .value();
       },
+
+      /**
+       *  Returns the unformatted numeral value of an object.
+       *  
+       *  @method unformatObject
+       *  @param  {object} obj Single object of one-level deep. Not an array
+       *  @return {object} ret
+       */
       unformatObject: function(obj) {
         var ret = _.clone(obj);
         ret = _.mapValues(obj, function(value) {
@@ -92,10 +102,12 @@ A thelma component providing data utility functions
         return ret;
 
       },
+
       unformatString: function(str){
         var ret = _.clone(str);  //TODO does string need cloning?
         return numeral().unformat(ret);
       },
+
       unformatStringIfNumeric: function(str){
         
         var unformatted = numeral().unformat(str);
@@ -118,6 +130,15 @@ A thelma component providing data utility functions
         return _.clone(obj, deep);
       },
 
+      /**
+       *  Determines whether arrays are equal.
+       *  Returns false if one value is unequal.
+       *  
+       *  @method arraysEqual
+       *  @param  {Array} arrayA array
+       *  @param  {Array} arrayB array
+       *  @return {boolean}
+       */
       arraysEqual: function(a, b) {
         if (a === b) return true;
         if (a == null || b == null) return false;
