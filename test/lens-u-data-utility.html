@@ -1,21 +1,21 @@
 <!doctype html>
 <html>
 <head>
-  <title>th-data-utility</title>
+  <title>lens-u-data-utility</title>
 
   <script src='../../webcomponentsjs/webcomponents.js'></script>
   <script src='../../web-component-tester/browser.js'></script>
 
-  <link rel='import' href='../th-data-utility.html'>
+  <link rel='import' href='../lens-u-data-utility.html'>
 
 </head>
 <body>
 
-  <th-data-utility id='data-utility'></th-data-utility>
+  <lens-u-data-utility id='data-utility'></lens-u-data-utility>
 
   <script>
     var should = chai.should();
-    var component = document.querySelector('th-data-utility');
+    var component = document.querySelector('lens-u-data-utility');
 
     // some input data
     var input = new Object([
@@ -28,7 +28,7 @@
       ]);
 
     // testing suite
-    suite('<th-data-utility>', function() {
+    suite('<lens-u-data-utility>', function() {
 
       test('component can be created as an object', function(done) {
         should.exist(component);
