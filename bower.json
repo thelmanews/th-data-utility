@@ -1,8 +1,8 @@
 {
-  "name": "lens-u-data-utility",
+  "name": "th-data-utility",
   "version": "0.0.0",
   "keywords": "lenses, polymer, web-components",
-  "main": "lens-u-data-utility.html",
+  "main": "th-data-utility.html",
   "dependencies": {
     "polymer": "Polymer/polymer#~0.5.1",
     "lodash": "lodash/lodash#~3.3.1",
