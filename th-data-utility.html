@@ -153,6 +153,36 @@ This component does not have a UI and is meant to be included inside of other co
           if (a[i] !== b[i]) return false;
         }
         return true;
+      },
+       /**
+       *  Extracts the prefix, suffix, decimal places and pattern from a string value
+       *  
+       *  @method extractNumberFormat
+       *  @param  {String} str - number given in string format
+       *  @return {Object} properties - prefix, suffix, decimalPlaces, pattern
+       */
+      extractNumberFormat: function(str){
+        if (!str){ return;}
+        var format = {},
+            str = ''+str,
+            patternMatch = str.replace(/,/g,'').match(/(\D*)\d*\.?\d*(\D*)/), // Matchgroups: 1) prefix 2) suffix
+            decimalsMatch = str.match(/(?:\.(\d+))?(?:[eE]([+-]?\d+))?$/); // Matchgroups: 1) numbers to right of decimal point 2) scientific notation decimal places
+        
+        format.prefix = patternMatch ? patternMatch[1] : "";
+        format.suffix = patternMatch ? patternMatch[2] : "";
+
+        if (!decimalsMatch) { 
+          format.decimalPlaces = 0; 
+        } else {
+          format.decimalPlaces = Math.max( 0,
+             // Number of digits right of decimal point.
+             (decimalsMatch[1] ? decimalsMatch[1].length : 0)
+             // Adjust for scientific notation.
+             - (decimalsMatch[2] ? +decimalsMatch[2] : 0)); 
+        }
+        format.pattern = format.prefix + "#,###.##" + format.suffix; // Does not incorporate decimal places
+
+        return format;
       }
     });
   </script>
